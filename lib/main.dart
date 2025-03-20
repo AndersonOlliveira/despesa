@@ -55,19 +55,21 @@ class MyhomePage extends StatefulWidget {
 }
 
 class _MyhomePageState extends State<MyhomePage> {
-  final _transactions = [
-    Transaction(
-      id: 't0',
-      title: 'Conta de Luz',
-      value: 211.30,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't1',
-      title: 'Novo Tênis de Corrida',
-      value: 310.76,
-      date: DateTime.now(),
-    ),
+  // retirado a lista pois estava estatico no codigo, agora fica sem nada e alterado
+  //para ele vira uma lista dinamica ficou O ATRIBUTO LISTA List<Transaction>
+  final List<Transaction> _transactions = [
+    // Transaction(
+    //   id: 't0',
+    //   title: 'Conta de Luz',
+    //   value: 211.30,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: 't1',
+    //   title: 'Novo Tênis de Corrida',
+    //   value: 310.76,
+    //   date: DateTime.now(),
+    // ),
   ];
 
   _addTransaction(String title, double value) {
