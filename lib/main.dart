@@ -1,6 +1,7 @@
 // import 'dart:ffi';
 
 // import 'package:expenses/models/transaction.dart';
+import 'package:expenses/components/chart.dart';
 import 'package:expenses/components/transaction_form.dart';
 import 'package:flutter/material.dart';
 import 'components/transaction_list.dart';
@@ -58,19 +59,26 @@ class _MyhomePageState extends State<MyhomePage> {
   // retirado a lista pois estava estatico no codigo, agora fica sem nada e alterado
   //para ele vira uma lista dinamica ficou O ATRIBUTO LISTA List<Transaction>
   final List<Transaction> _transactions = [
-    // Transaction(
-    //   id: 't0',
-    //   title: 'Conta de Luz',
-    //   value: 211.30,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: 't1',
-    //   title: 'Novo Tênis de Corrida',
-    //   value: 310.76,
-    //   date: DateTime.now(),
-    // ),
+    Transaction(
+      id: 't0',
+      title: 'Conta de Luz',
+      value: 211.30,
+      date: DateTime.now().subtract(Duration(days: 33)),
+    ),
+    Transaction(
+      id: 't1',
+      title: 'Novo Tênis de Corrida',
+      value: 310.76,
+      date: DateTime.now().subtract(Duration(days: 3)),
+    ),
   ];
+
+  //funcao nova para pegar o paramento dos dias que tem que aparecer  de 7 dias
+  List<Transaction> get _recentTransaction {
+    return _transactions.where((tr) {
+      return tr.date.isAfter(DateTime.now().subtract(Duration(days: 7)));
+    }).toList();
+  }
 
   _addTransaction(String title, double value) {
     final newTransaction = Transaction(
@@ -117,14 +125,15 @@ class _MyhomePageState extends State<MyhomePage> {
           // mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Container(
-              // width: double.infinity,
-              child: Card(
-                color: Colors.blue,
-                child: Text("grafico"),
-                elevation: 5,
-              ),
-            ),
+            Chart(_recentTransaction),
+            // Container(
+            //   // width: double.infinity,
+            //   child: Card(
+            //     color: Colors.blue,
+            //     child: Text("grafico"),
+            //     elevation: 5,
+            //   ),
+            // ),
             TransactionList(_transactions),
 
             // Card(child: Text("Lista de transações")),
